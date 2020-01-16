@@ -9,7 +9,7 @@ import java.io.Serializable;
  **/
 public interface BaseMapper<T> {
 
-    T findById(Serializable id);
+    T selectById(Serializable id);
 
     int deleteById(Serializable id);
 

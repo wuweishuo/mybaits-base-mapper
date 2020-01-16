@@ -15,8 +15,7 @@ public class MybatisBaseCrudApplicationTests {
 
     @Test
     public void test() {
-        User user = userMapper.findById(1);
-        System.out.println(user);
+        System.out.println(userMapper.selectById(1));
     }
 
 }
