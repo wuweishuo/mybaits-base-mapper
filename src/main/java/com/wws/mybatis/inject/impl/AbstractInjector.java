@@ -1,6 +1,5 @@
 package com.wws.mybatis.inject.impl;
 
-import com.wws.mybatis.BaseMapper;
 import com.wws.mybatis.inject.Injector;
 import com.wws.mybatis.inject.Method;
 import com.wws.mybatis.metadata.TableInfo;
@@ -20,7 +19,7 @@ public abstract class AbstractInjector implements Injector {
 
     private Configuration configuration;
 
-    AbstractInjector(Configuration configuration){
+    AbstractInjector(Configuration configuration) {
         setConfig(configuration);
     }
 

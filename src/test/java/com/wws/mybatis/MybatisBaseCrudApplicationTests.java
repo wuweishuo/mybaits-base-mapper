@@ -14,8 +14,27 @@ public class MybatisBaseCrudApplicationTests {
     UserMapper userMapper;
 
     @Test
-    public void test() {
-        System.out.println(userMapper.selectById(1));
+    public void testSelectById() {
+        System.out.println(userMapper.selectById(18));
     }
+
+    @Test
+    public void testDeleteById() {
+        System.out.println(userMapper.deleteById(19));
+    }
+
+    @Test
+    public void testInset() {
+        User user = User.builder().username("aa").password("aa").build();
+        System.out.println(userMapper.insert(user));
+        System.out.println(user);
+    }
+
+    @Test
+    public void testUpdateById() {
+        User user = User.builder().id(18L).username("bb").password("aa").build();
+        System.out.println(userMapper.updateById(user));
+    }
+
 
 }

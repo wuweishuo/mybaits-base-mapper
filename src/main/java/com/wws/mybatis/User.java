@@ -3,8 +3,7 @@ package com.wws.mybatis;
 import com.wws.mybatis.annotation.Column;
 import com.wws.mybatis.annotation.Id;
 import com.wws.mybatis.annotation.Table;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @author wws
@@ -14,6 +13,9 @@ import lombok.ToString;
 @Data
 @ToString
 @Table(value = "user")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id(value = "id")

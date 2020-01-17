@@ -16,4 +16,10 @@ public class FieldInfo {
 
     private String column;
 
+    private static final String setSql = "<if test=\"%s != null\">%s = #{%s},</if>";
+
+    public String getSetSql() {
+        return String.format(setSql, property, column, property);
+    }
+
 }

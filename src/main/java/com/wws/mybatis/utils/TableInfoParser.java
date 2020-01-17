@@ -17,10 +17,10 @@ import java.util.List;
  **/
 public class TableInfoParser {
 
-    public static TableInfo parse(Class model){
+    public static TableInfo parse(Class model) {
         TableInfo tableInfo = new TableInfo();
         Table annotation = (Table) model.getAnnotation(Table.class);
-        if(annotation == null){
+        if (annotation == null) {
             return null;
         }
         String tableName = annotation.value();
@@ -29,7 +29,7 @@ public class TableInfoParser {
         List<FieldInfo> fieldList = new ArrayList<>(fields.length);
         for (Field field : fields) {
             Id id = field.getAnnotation(Id.class);
-            if(id != null) {
+            if (id != null) {
                 FieldInfo idInfo = new FieldInfo();
                 idInfo.setColumn(id.value());
                 idInfo.setProperty(field.getName());
@@ -38,7 +38,7 @@ public class TableInfoParser {
             }
 
             Column column = field.getAnnotation(Column.class);
-            if(column != null){
+            if (column != null) {
                 FieldInfo fieldInfo = new FieldInfo();
                 fieldInfo.setColumn(column.value());
                 fieldInfo.setProperty(field.getName());
@@ -47,14 +47,6 @@ public class TableInfoParser {
             }
         }
         tableInfo.setFieldInfoList(fieldList);
-
-        StringBuilder stringBuilder = new StringBuilder();
-        for (FieldInfo fieldInfo : fieldList) {
-            stringBuilder.append(fieldInfo.getColumn()).append(",");
-        }
-        stringBuilder.append(tableInfo.getId().getColumn());
-
-        tableInfo.setFields(stringBuilder.toString());
 
         return tableInfo;
     }

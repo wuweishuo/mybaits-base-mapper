@@ -13,4 +13,8 @@ public interface BaseMapper<T> {
 
     int deleteById(Serializable id);
 
+    int insert(T et);
+
+    int updateById(T et);
+
 }

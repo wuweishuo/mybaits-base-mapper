@@ -4,12 +4,16 @@ import com.wws.mybatis.BaseMapper;
 import com.wws.mybatis.enums.SqlMethod;
 import com.wws.mybatis.inject.Method;
 import com.wws.mybatis.metadata.TableInfo;
-import org.apache.ibatis.mapping.*;
+import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.mapping.ResultMap;
+import org.apache.ibatis.mapping.SqlCommandType;
+import org.apache.ibatis.mapping.SqlSource;
 import org.apache.ibatis.scripting.defaults.RawSqlSource;
 import org.apache.ibatis.session.Configuration;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,8 +27,8 @@ public class DeleteById implements Method {
 
     @Override
     public MappedStatement build(Configuration configuration, Class<? extends BaseMapper> mapper, Class model, TableInfo tableInfo) {
-        String statementId = mapper.getName() +"." + sqlMethod.getMethod();
-        String sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), tableInfo.getId().getColumn());
+        String statementId = mapper.getName() + "." + sqlMethod.getMethod();
+        String sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), tableInfo.getId().getColumn(), tableInfo.getId().getProperty());
         SqlSource sqlSource = new RawSqlSource(configuration, sql, Serializable.class);
 
         MappedStatement.Builder msBuilder = new MappedStatement.Builder(configuration, statementId, sqlSource, SqlCommandType.DELETE);
@@ -35,8 +39,7 @@ public class DeleteById implements Method {
                 Integer.class,
                 new ArrayList<>(),
                 null).build();
-        List resultMaps = new ArrayList();
-        resultMaps.add(inlineResultMap);
+        List resultMaps = Collections.singletonList(inlineResultMap);
         msBuilder.resultMaps(resultMaps);
 
         return msBuilder.build();
